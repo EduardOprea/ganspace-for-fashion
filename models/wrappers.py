@@ -114,6 +114,8 @@ class StyleGAN2(BaseModel):
             'bedrooms': 256,
             'kitchen': 256,
             'places': 256,
+            'fashionfirst': 512,
+            'fashionhm': 512
         }
 
         assert self.outclass in configs, \
@@ -144,7 +146,9 @@ class StyleGAN2(BaseModel):
             'cat': 'https://drive.google.com/uc?export=download&id=15vJP8GDr0FlRYpE8gD7CdeEz2mXrQMgN',
             'places': 'https://drive.google.com/uc?export=download&id=1X8-wIH3aYKjgDZt4KMOtQzN1m4AlCVhm',
             'bedrooms': 'https://drive.google.com/uc?export=download&id=1nZTW7mjazs-qPhkmbsOLLA_6qws-eNQu',
-            'kitchen': 'https://drive.google.com/uc?export=download&id=15dCpnZ1YLAnETAPB0FGmXwdBclbwMEkZ'
+            'kitchen': 'https://drive.google.com/uc?export=download&id=15dCpnZ1YLAnETAPB0FGmXwdBclbwMEkZ',
+            'fashionfirst': 'https://drive.google.com/uc?export=download&id=1Gyr1sOZZNwLXPN1n5RugXeKYU6sP-aJF',
+            'fashionhm': 'https://drive.google.com/uc?export=download&id=1sw5JvdeV4y7Sxl0PDzlgqswkSO_pTm7l'
         }
 
         url = checkpoints[self.outclass]
@@ -154,7 +158,7 @@ class StyleGAN2(BaseModel):
         checkpoint_root = os.environ.get('GANCONTROL_CHECKPOINT_DIR', Path(__file__).parent / 'checkpoints')
         checkpoint = Path(checkpoint_root) / f'stylegan2/stylegan2_{self.outclass}_{self.resolution}.pt'
         
-        self.model = stylegan2.Generator(self.resolution, 512, 8).to(self.device)
+        self.model = stylegan2.Generator(self.resolution, 512, 2).to(self.device)
 
         if not checkpoint.is_file():
             os.makedirs(checkpoint.parent, exist_ok=True)
