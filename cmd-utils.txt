@@ -1,0 +1,11 @@
+In order to be able to convert the StyleGAN2 checkpoint from .pkl to .pt you need to use this repo (git clone https://github.com/dvschultz/stylegan2-ada-pytorch/)
+with the following command :
+python export_weights.py 'E:\Fisierele mele\Facultate\Cercetare\Code\ganspace\models\stylegan2\stylegan2-pytorch\checkpoint\fashionganhm240_27august.pkl' 'E:\Fisierele mele\Facultate\Cercetare\Code\ganspace\models\stylegan2\stylegan2-pytorch\checkpoint\fashionganhm240_27august.pt'
+
+In order to do PCA on a new model, you need to put the model in models/wrappers.py :
+- image width in configs in constructor
+- download url in download_checkpoint
+
+Command for computing the PCA
+
+python visualize.py --model StyleGAN2 --class fashionfirst --use_w --layer=style -c 20 --video
